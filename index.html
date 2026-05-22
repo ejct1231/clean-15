@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1-5 청소 리스트</title>
+    <style>
+        :root {
+            --primary-color: #2a9d8f;
+            --secondary-color: #264653;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+            --accent-color: #e76f51;
+            --rule-bg: #fffbf0;
+            --rule-border: #ffeaa7;
+        }
+        
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', dotum, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            color: var(--secondary-color);
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+
+        /* 📌 새로 추가된 청소 규칙 안내 박스 스타일 */
+        .rule-box {
+            background-color: var(--rule-bg);
+            border: 1px solid var(--rule-border);
+            border-radius: 8px;
+            padding: 18px 20px;
+            margin-bottom: 25px;
+        }
+
+        .rule-box h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            color: #d63031;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .rule-list {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 14px;
+            color: #444;
+        }
+
+        .rule-list li {
+            margin-bottom: 8px;
+        }
+
+        .rule-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .rule-list strong {
+            color: #2d3436;
+        }
+
+        .section {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: #fafafa;
+        }
+
+        .section-title {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: var(--secondary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+
+        .form-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input, select, button {
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        input:focus, select:focus {
+            border-color: var(--primary-color);
+        }
+
+        input[type="text"] {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s, opacity 0.2s;
+        }
+
+        button:hover {
+            background-color: #228074;
+        }
+        
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: var(--secondary-color);
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fdfdfd;
+        }
+        
+        tr:hover {
+            background-color: #f1f7f6;
+        }
+
+        .loading-status {
+            text-align: center;
+            font-weight: bold;
+            color: var(--primary-color);
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>❤️ 1-5 청소 요정들 ❤️</h1>
+
+    <!-- 📌 오늘의 청소 규칙 안내 박스 -->
+    <div class="rule-box">
+        <h3>🚨 규칙 어긴 경우 </h3>
+        <ul class="rule-list">
+            <li><strong>8:50 이후 등교</strong> (8:51 등교부터)</li>
+            <li><strong>교복 미착용</strong> (풀사복)</li>
+            <li><strong>수업 시작 후 3분 지나고 입실</strong> (ex. 9:10 수업 시작 시, 9:13부터)</li>
+            <li><strong>수업 시간 취침 및 잡담</strong> (프밍 시간에 컴퓨터로 딴짓하는 행위 포함)</li>
+            <li><strong>타반 친구 교실 출입 시</strong> ➔ <strong>관련된 우리반 학생</strong>이 청소</li>
+        </ul>
+    </div>
+
+    <!-- 학생 기록 추가 섹션 -->
+    <div class="section">
+        <div class="section-title">👤 학생 기록 추가 </div>
+        <div class="form-group">
+            <label for="studentDate">날짜:</label>
+            <input type="date" id="studentDate">
+            
+            <input type="text" id="studentName" placeholder="학생 이름 입력" required>
+            <input type="text" id="studentReason" placeholder="위반 사유 입력 (예: 조회 지각, 1교시 잠)" required>
+            
+            <button id="submitBtn" onclick="addStudent()">등록하기</button>
+        </div>
+    </div>
+
+    <!-- 명렬표 테이블 -->
+    <table id="studentTable">
+        <thead>
+            <tr>
+                <th>날짜</th>
+                <th>이름</th>
+                <th>위반 사유</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <tr><td colspan="3" class="loading-status">데이터를 불러오는 중입니다...</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // 현재 PC 시간 기준으로 YYYY-MM-DD 문자열을 만드는 함수
+    function getTodayString() {
+        const d = new Date();
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
+    // 오늘 날짜 입력창 기본값 설정
+    const todayStr = getTodayString();
+    document.getElementById('studentDate').value = todayStr;
+
+    // 🔗 배포된 구글 웹앱 URL 주소
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxOyk5TbUi1eB1uY5B8FqiyNUYOEmXc0TlwpKnmJbpRHA5Azop5YlZvwcYaKXYQA0D3/exec'; 
+    let students = [];
+
+    // 주소 유효성 검사 후 초기 데이터 호출
+    if (SCRIPT_URL && SCRIPT_URL.startsWith('https://script.google.com')) {
+        fetchDataFromServer();
+    } else {
+        document.getElementById('tableBody').innerHTML = '<tr><td colspan="3" class="loading-status" style="color:red;">HTML 코드 상단 스크립트 영역에 올바른 구글 웹앱 URL을 입력해 주세요!</td></tr>';
+    }
+
+    // 구글 스프레드시트로부터 데이터 가져오기
+    function fetchDataFromServer() {
+        if (!SCRIPT_URL || !SCRIPT_URL.startsWith('https://script.google.com')) return;
+        
+        const tableBody = document.getElementById('tableBody');
+        tableBody.innerHTML = '<tr><td colspan="3" class="loading-status">구글 스프레드시트에서 데이터를 가져오는 중...</td></tr>';
+
+        fetch(SCRIPT_URL + '?action=read')
+            .then(response => response.json())
+            .then(data => {
+                students = data;
+                renderTable();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                tableBody.innerHTML = '<tr><td colspan="3" class="loading-status" style="color:red;">데이터를 불러오지 못했습니다. URL 배포 설정을 확인하세요.</td></tr>';
+            });
+    }
+
+    // 구글 스프레드시트에 데이터 추가하기
+    function addStudent() {
+        if (!SCRIPT_URL || !SCRIPT_URL.startsWith('https://script.google.com')) {
+            alert('HTML 코드 내에 웹앱 주소 설정이 올바르지 않습니다.');
+            return;
+        }
+
+        const date = document.getElementById('studentDate').value;
+        const name = document.getElementById('studentName').value.trim();
+        const reason = document.getElementById('studentReason').value.trim();
+
+        if (!name || !reason) {
+            alert("학생 이름과 위반 사유를 모두 입력해주세요.");
+            return;
+        }
+
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.disabled = true;
+        submitBtn.innerText = '저장 중...';
+
+        const params = new URLSearchParams();
+        params.append('date', date);
+        params.append('name', name);
+        params.append('reason', reason);
+
+        fetch(SCRIPT_URL + '?action=insert', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: params.toString()
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.result === 'success') {
+                document.getElementById('studentName').value = '';
+                document.getElementById('studentReason').value = '';
+                fetchDataFromServer();
+            } else {
+                alert('저장 실패: ' + result.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('구글 시트에 연결하는 도중 오류가 발생했습니다.');
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerText = '등록하기';
+        });
+    }
+
+    // 테이블 렌더링 (오늘 날짜 필터링 + 중복 이름 합치기 + 가나다순 정렬)
+    function renderTable() {
+        const tableBody = document.getElementById('tableBody');
+        tableBody.innerHTML = '';
+
+        if (students.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="3" class="loading-status">등록된 학생이 없습니다.</td></tr>';
+            return;
+        }
+
+        const currentToday = getTodayString();
+        const mergedStudents = {};
+
+        students.forEach((student) => {
+            let formattedDate = '';
+            if (student.date) {
+                const d = new Date(student.date);
+                if (!isNaN(d.getTime())) {
+                    const year = d.getFullYear();
+                    const month = String(d.getMonth() + 1).padStart(2, '0');
+                    const day = String(d.getDate()).padStart(2, '0');
+                    formattedDate = `${year}-${month}-${day}`;
+                } else {
+                    formattedDate = student.date;
+                }
+            }
+
+            if (formattedDate !== currentToday) return;
+
+            const name = student.name.trim();
+            const reason = student.reason.trim();
+
+            if (mergedStudents[name]) {
+                if (!mergedStudents[name].reasons.includes(reason)) {
+                    mergedStudents[name].reasons.push(reason);
+                }
+            } else {
+                mergedStudents[name] = {
+                    date: formattedDate,
+                    reasons: [reason]
+                };
+            }
+        });
+
+        const sortedList = Object.keys(mergedStudents).map(name => {
+            return {
+                name: name,
+                date: mergedStudents[name].date,
+                reason: mergedStudents[name].reasons.join(', ')
+            };
+        });
+        sortedList.sort((a, b) => a.name.localeCompare(b.name, 'ko'));
+
+        if (sortedList.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="3" class="loading-status">오늘 청소 구역에 걸린 요정이 없습니다! 깨끗한 하루네요. ✨</td></tr>';
+            return;
+        }
+
+        sortedList.forEach((student) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${student.date}</td>
+                <td><strong>${student.name}</strong></td>
+                <td>${student.reason}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+</script>
+
+</body>
+</html>
