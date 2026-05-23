@@ -5,183 +5,227 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>1-5 청소 요정들</title>
     <style>
-        :root {
-            --primary-color: #2a9d8f;
-            --secondary-color: #264653;
-            --bg-color: #f8f9fa;
-            --card-bg: #ffffff;
-            --text-color: #333333;
-            --border-color: #e0e0e0;
-            --accent-color: #e76f51;
-            --rule-bg: #fffbf0;
-            --rule-border: #ffeaa7;
-        }
-        
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
+    :root {
+        --primary-color: #2a9d8f;
+        --secondary-color: #264653;
+        --bg-color: #f8f9fa;
+        --card-bg: #ffffff;
+        --text-color: #333333;
+        --border-color: #e0e0e0;
+        --accent-color: #e76f51;
+        --rule-bg: #fffbf0;
+        --rule-border: #ffeaa7;
+        /* 📌 안내 사항 박스용 색상 추가 */
+        --info-bg: #f1f7f6;
+        --info-border: #cce3de;
+    }
+    
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Malgun Gothic', dotum, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            line-height: 1.5;
-        }
+    body {
+        font-family: 'Malgun Gothic', dotum, sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        margin: 0;
+        padding: 20px;
+        line-height: 1.5;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: var(--card-bg);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
 
-        h1 {
-            color: var(--secondary-color);
-            text-align: center;
-            margin-bottom: 25px;
-            font-size: 24px;
-        }
+    h1 {
+        color: var(--secondary-color);
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 24px;
+    }
 
-        /* 📌 새로 추가된 청소 규칙 안내 박스 스타일 */
-        .rule-box {
-            background-color: var(--rule-bg);
-            border: 1px solid var(--rule-border);
-            border-radius: 8px;
-            padding: 18px 20px;
-            margin-bottom: 25px;
-        }
+    /* 📌 청소 규칙 안내 박스 스타일 */
+    .rule-box {
+        background-color: var(--rule-bg);
+        border: 1px solid var(--rule-border);
+        border-radius: 8px;
+        padding: 18px 20px;
+        margin-bottom: 15px;
+    }
 
-        .rule-box h3 {
-            margin-top: 0;
-            margin-bottom: 12px;
-            color: #d63031;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+    .rule-box h3 {
+        margin-top: 0;
+        margin-bottom: 12px;
+        color: #d63031;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
 
-        .rule-list {
-            margin: 0;
-            padding-left: 20px;
-            font-size: 14px;
-            color: #444;
-        }
+    /* 📌 새로 추가된 유의사항/청소구역 안내 박스 스타일 */
+    .info-box {
+        background-color: var(--info-bg);
+        border: 1px solid var(--info-border);
+        border-radius: 8px;
+        padding: 18px 20px;
+        margin-bottom: 25px;
+    }
 
-        .rule-list li {
-            margin-bottom: 8px;
-        }
+    .info-box h3 {
+        margin-top: 0;
+        margin-bottom: 12px;
+        color: var(--secondary-color);
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
 
-        .rule-list li:last-child {
-            margin-bottom: 0;
-        }
+    .rule-list {
+        margin: 0;
+        padding-left: 20px;
+        font-size: 14px;
+        color: #444;
+    }
 
-        .rule-list strong {
-            color: #2d3436;
-        }
+    .rule-list li {
+        margin-bottom: 10px; /* 큰 항목 간의 간격을 8px -> 10px로 살짝 넓혔습니다 */
+    }
 
-        .section {
-            margin-bottom: 25px;
-            padding: 20px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            background: #fafafa;
-        }
+    .rule-list li:last-child {
+        margin-bottom: 0;
+    }
 
-        .section-title {
-            margin-top: 0;
-            margin-bottom: 15px;
-            font-size: 16px;
-            color: var(--secondary-color);
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 5px;
-        }
+    /* 🛠️ 새로 추가/수정된 하위 리스트(세부 항목) 스타일 */
+    .rule-list ul {
+        margin-top: 6px;       /* 부모 타이틀(청소 구역 등)과의 간격 */
+        margin-bottom: 4px;    /* 하위 단락이 끝난 후 다음 항목과의 간격 */
+        padding-left: 20px;
+    }
 
-        .form-group {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
+    .rule-list ul li {
+        margin-bottom: 5px;    /* 세부 항목(쓸기, 닦기 등) 간의 간격 */
+        color: #555555;        /* 가독성을 위해 색상을 살짝 부드럽게 조정 */
+    }
 
-        label {
-            font-weight: bold;
-            font-size: 14px;
-        }
+    .rule-list ul li:last-child {
+        margin-bottom: 0;
+    }
 
-        input, select, button {
-            padding: 10px 14px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 14px;
-            outline: none;
-        }
-        
-        input:focus, select:focus {
-            border-color: var(--primary-color);
-        }
+    .rule-list strong {
+        color: #2d3436;
+    }
 
-        input[type="text"] {
-            flex: 1;
-            min-width: 180px;
-        }
+    /* 경고 텍스트 강조 스타일 */
+    .warning-text {
+        color: #d63031;
+        font-weight: bold;
+    }
 
-        button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.2s, opacity 0.2s;
-        }
+    .section {
+        margin-bottom: 25px;
+        padding: 20px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        background: #fafafa;
+    }
 
-        button:hover {
-            background-color: #228074;
-        }
-        
-        button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
+    .section-title {
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-size: 16px;
+        color: var(--secondary-color);
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 5px;
+    }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            font-size: 14px;
-        }
+    .form-group {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
 
-        th, td {
-            border: 1px solid var(--border-color);
-            padding: 12px;
-            text-align: center;
-        }
+    label {
+        font-weight: bold;
+        font-size: 14px;
+    }
 
-        th {
-            background-color: var(--secondary-color);
-            color: white;
-            font-weight: bold;
-        }
+    input, select, button {
+        padding: 10px 14px;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        font-size: 14px;
+        outline: none;
+    }
+    
+    input:focus, select:focus {
+        border-color: var(--primary-color);
+    }
 
-        tr:nth-child(even) {
-            background-color: #fdfdfd;
-        }
-        
-        tr:hover {
-            background-color: #f1f7f6;
-        }
+    input[type="text"] {
+        flex: 1;
+        min-width: 180px;
+    }
 
-        .loading-status {
-            text-align: center;
-            font-weight: bold;
-            color: var(--primary-color);
-            padding: 30px;
-        }
-    </style>
+    button {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.2s, opacity 0.2s;
+    }
+
+    button:hover {
+        background-color: #228074;
+    }
+    
+    button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    th, td {
+        border: 1px solid var(--border-color);
+        padding: 12px;
+        text-align: center;
+    }
+
+    th {
+        background-color: var(--secondary-color);
+        color: white;
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: #fdfdfd;
+    }
+    
+    tr:hover {
+        background-color: #f1f7f6;
+    }
+
+    .loading-status {
+        text-align: center;
+        font-weight: bold;
+        color: var(--primary-color);
+        padding: 30px;
+    }
+</style>
 </head>
 <body>
 
@@ -190,19 +234,40 @@
 
     <!-- 📌 오늘의 청소 규칙 안내 박스 -->
     <div class="rule-box">
-        <h3>🚨 규칙 어긴 경우 </h3>
+        <h3>🚨 규칙 어긴 경우</h3>
         <ul class="rule-list">
             <li><strong>8:50 이후 등교</strong> (8:51 등교부터)</li>
-            <li><strong>교복 미착용</strong> (풀사복)</li>
+            <li><strong>교복 미착용</strong> (풀 사복)</li>
             <li><strong>수업 시작 후 3분 지나고 입실</strong> (ex. 9:10 수업 시작 시, 9:13부터)</li>
             <li><strong>수업 시간에 자거나 잡담 등 수업 방해</strong> (프밍 시간에 컴퓨터로 딴짓하는 행위 포함)</li>
-            <li><strong>타반 친구 교실 출입 시</strong> ➔ <strong>관련된 우리반 학생</strong>이 청소</li>
+            <li><strong>타반 학생 교실 출입 시</strong> ➔ <strong>관련된 우리반 학생</strong>이 청소</li>
+        </ul>
+    </div>
+
+    <!-- 📌 [신규] 청소 유의사항 및 구역 안내 박스 -->
+    <div class="info-box">
+        <h3>📢 필독</h3>
+        <ul class="rule-list">
+            <li><strong>이의 제기<strong>는 반드시 <span class="warning-text">종례 전까지</span> 해야 합니다.</li>
+            <li><strong>청소 구역 및 배정</strong> 
+                <ul>
+                    <li>교실: 쓸기, 닦기, 손걸레, 책상 밀고 줄 맞추기 등</li>
+                    <li>복도: 쓸기, 닦기</li>
+                    <li>※ 구역은 <span class="warning-text">담임샘이 랜덤으로 분배함!</span></li>
+                </ul>
+            </li>
+            <li><strong>청소 도망 금지</strong>
+                <ul>
+                    <li>청소 <strong>1회</strong> 도망 시 ➔ <strong>다음 날 청소</strong></li>
+                    <li>청소 <strong>2회</strong> 도망 시 ➔ <span class="warning-text">사실 확인서</span> 작성</li>
+                </ul>
+            </li>
         </ul>
     </div>
 
     <!-- 학생 기록 추가 섹션 -->
     <div class="section">
-        <div class="section-title">👤 청소 요정 추가 </div>
+        <div class="section-title">👤 청소 요정 추가</div>
         <div class="form-group">
             <label for="studentDate">날짜:</label>
             <input type="date" id="studentDate">
